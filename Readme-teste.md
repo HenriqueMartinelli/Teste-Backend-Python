@@ -9,14 +9,14 @@ Este projeto demonstra o uso do Apache Kafka para enviar dados de uma API web pa
 - Bibliotecas Python listadas em `requirements.txt`
 
 1. Configure o ambiente Kafka:
-# docker-compose up -d
+docker-compose up -d
 
 2. Em um terminal, vá para o diretório app e inicie a API:
-# cd app
-# python3 api.py
+cd app
+python3 api.py
 
 3. Em outro terminal, vá para o diretório raiz do projeto e execute o script main.py:
-# python3 main.py
+python3 main.py
 
 Isso iniciará a API na porta 5000.
 
