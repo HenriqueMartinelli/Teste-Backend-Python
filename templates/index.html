@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visualizador de Dados do Kafka</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bem-vindo ao Visualizador de Dados do Kafka</h1>
+    <p>Aqui você pode visualizar mensagens do Kafka em tempo real:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Capital</th>
+                <th>População</th>
+                <th>Área (km2)</th>
+            </tr>
+        </thead>
+        <tbody id="kafka-data">
+        </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        const socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('connect', function() {
+            console.log('Conectado ao servidor WebSocket');
+        });
+
+        socket.on('new_message', function(data) {
+            const message = JSON.parse(data);
+
+            const row = $('<tr>');
+            row.append($('<td>').text(message["Capital:"]));
+            row.append($('<td>').text(message["Population:"]));
+            row.append($('<td>').text(message["Area (km2):"]));
+
+            $('#kafka-data').append(row);
+        });
+    </script>
+</body>
+</html>

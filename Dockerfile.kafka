@@ -1,0 +1,8 @@
+# Use a imagem base do Kafka
+FROM confluentinc/cp-kafka:latest
+
+# Adicione a configuração do Kafka ao arquivo de propriedades
+RUN echo "advertised.listeners=PLAINTEXT://localhost:9092" >> /etc/kafka/server.properties
+
+# O comando para iniciar o Kafka é "kafka-server-start"
+CMD ["kafka-server-start", "/etc/kafka/server.properties"]
